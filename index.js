@@ -158,21 +158,20 @@ fastify.post('/login', async (request, reply) => {
     let user = request.body.username;
     let pass = request.body.password;
 
-    // ✅ Validate username
     if (!user) {
         errors.username = "Username is required";
     } else if (!/^[A-Za-z]+$/.test(user)) { 
         errors.username = "Username should contain only letters (A-Z, a-z)";
     }
 
-    // ✅ Validate password
+ 
     if (!pass) {
         errors.password = "Password is required";
     } else if (!/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(pass)) {
         errors.password = "Password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.";
     }
 
-    // 🚨 If errors exist, return them
+   
     if (Object.keys(errors).length > 0) {
         return {errors };
     }
